@@ -1,0 +1,29 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+string timeConversion(string s) {
+    string hourStr = s.substr(0, 2);
+    int hour = stoi(hourStr);
+    string period = s.substr(8, 2);
+
+    if (period == "PM" && hour != 12) {
+        hour += 12;
+    } else if (period == "AM" && hour == 12) {
+        hour = 0;
+    }
+
+    string hour24 = (hour < 10 ? "0" : "") + to_string(hour);
+    return hour24 + s.substr(2, 6);
+}
+
+int main() {
+    string s;
+    cout << "Enter time in 12-hour format (hh:mm:ssAM or hh:mm:ssPM): ";
+    cin >> s;
+    
+    string time24 = timeConversion(s);
+    cout << "Time in 24-hour format: " << time24 << endl;
+
+    return 0;
+}
